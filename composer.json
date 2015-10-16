@@ -1,9 +1,9 @@
 {
-  "name" : "themes/zf2-basic",
-  "description" : "ZF2Basic - Responsive Bootstrap Theme ZF2 skeleton",
+  "name" : "themes/zf2-adminlte",
+  "description" : "ZF2AdminLTE - Responsive Bootstrap3 Theme ZF2 skeleton",
   "version" : "1.0",
   "license" : "BSD-3-Clause",
-  "keywords" : [ "bootstrap", "theme", "Basic", "zendframework2", "skeleton" ],
+  "keywords" : [ "bootstrap", "theme", "AdminLTE", "zendframework2", "skeleton" ],
   "extra" : {
     "branch-alias" : {
       "dev-master" : "master"
@@ -16,7 +16,7 @@
     "post-update-cmd" : [ ]
   },
   "type" : "module",
-  "homepage" : "http://git.dragon-projects.de:81/themes/zf2-basic",
+  "homepage" : "http://git.dragon-projects.de:81/themes/zf2-adminlte",
   "authors" : [ {
     "name" : "Björn Bartels",
     "email" : "bartels@dragon-projects.net",
