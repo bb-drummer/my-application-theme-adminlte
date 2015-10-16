@@ -1,106 +1,301 @@
 <?php echo $this->doctype(); ?>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <?php echo $this->headTitle('[BB] '. $this->translate('MyApplication'))->setSeparator(' - ')->setAutoEscape(false) ?>
-        <?php echo $this->headMeta()
-            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ?>
-        <!-- styles -->
-        <?php 
-        	$themePath = "assets/themes/adminlte/";
-        	$this->headLink(array(
-        			'rel' => 'shortcut icon', 
-        			'type' => 'image/vnd.microsoft.icon', 
-        			'href' => $this->basePath($themePath . 'img/favicon.ico')
-     			))
-				->prependStylesheet($this->basePath($themePath . 'css/app.css'))
-				->prependStylesheet($this->basePath($themePath . 'css/bootstrap/css/bootstrap-theme.min.css'))
-				->prependStylesheet($this->basePath($themePath . 'css/bootstrap/css/bootstrap.min.css'));
+<html class="no-js css-menubar" lang="en">
+<head>
+	<!-- <?php echo __DIR__ ; ?> -->
+	<meta charset="utf-8">
+	<?php echo $this->headTitle('[BB] '. $this->translate('MyApplication'))->setSeparator(' - ')->setAutoEscape(false) ?>
+	<?php 
+		echo $this->headMeta()
+			->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+			->appendName('viewport', 'width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui')
+			->appendName('description', 'ZF2 Base Application')
+			->appendName('author', '[drgon-projecs.net]')
+		;
+	?>
 
-        	echo $this->headLink();
-		?>
-    </head>
-    <body>
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath($themePath.'img/zf2-logo.png') ?>" alt="MyApplication" />&nbsp;<?php echo $this->translate('MyApplication') ?></a>
-                </div>
-				<div class="collapse navbar-collapse">
-					<?php
-						/*$topNavPartial = array('partial/topbar-navigation.phtml', 'default');
-						$this->navigation('navigation')
-							  ->menu()
-							  //->setMinDepth(0)
-							  //->setMaxDepth(0)
-							  ->setPartial($topNavPartial)
-							  ->setUlClass('nav navbar-nav')
-						;
-						echo $this->navigation('navigation')
-							->menu()
-							//->render()
-						;*/
-						$oTwitterBootstrap = $this->bootstrap();
-						$oNavBar = $oTwitterBootstrap->Navbar('navigation')
-							->setUlClass('nav navbar-nav')
-							->setMinDepth(0)
-							->setMaxDepth(2)
-							->setIconPrefixClass('glyphicon glyphicon-')
-						;
-						echo $oNavBar->render();
-					?>
-				</div> 
-            </div>
-        </nav>
-        <div class="container-fluid">
+	<?php 
+		$themePath = "assets/themes/adminlte/";
+		$this->headLink(array(
+				'rel' => 'shortcut icon', 
+				'type' => 'image/vnd.microsoft.icon', 
+				'href' => $this->basePath($themePath . 'img/favicon.ico')
+ 			))
+ 			/*->append((object)array(
+				'rel' => 'apple-touch-icon', 
+				'href' => $this->basePath($themePath . 'images/apple-touch-icon.png')
+ 			))*/
+		;
+		$this->headLink()
+			->appendStylesheet($this->basePath($themePath . 'css/bootstrap/css/bootstrap.min.css'))
+			->appendStylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+			->appendStylesheet('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+			->appendStylesheet($this->basePath($themePath . 'css/AdminLTE.min.css'))
+			->appendStylesheet($this->basePath($themePath . 'css/skins/_all-skins.min.css'))
+			->appendStylesheet($this->basePath($themePath . 'js/plugins/iCheck/flat/blue.css'))
+			->appendStylesheet($this->basePath($themePath . 'js/plugins/morris/morris.css'))
+			->appendStylesheet($this->basePath($themePath . 'js/plugins/jvectormap/jquery-jvectormap-1.2.2.css'))
+			->appendStylesheet($this->basePath($themePath . 'js/plugins/datepicker/datepicker3.css'))
+			->appendStylesheet($this->basePath($themePath . 'js/plugins/daterangepicker/daterangepicker-bs3.css'))
+			->appendStylesheet($this->basePath($themePath . 'js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'))
+		;
+		echo $this->headLink();
+	?>
+
+	<?php 
+		$this->headScript()
+			->appendFile($this->basePath($themePath . 'vendor/html5shiv//html5shiv.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+			->appendFile($this->basePath($themePath . 'vendor/media-match/media.match.min.js'), 'text/javascript', array('conditional' => 'lt IE 10',))
+			->appendFile($this->basePath($themePath . 'vendor/respond/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 10',))
+			->appendFile($this->basePath($themePath . 'vendor/modernizr/modernizr.js'), 'text/javascript')
+			->appendFile($this->basePath($themePath . 'vendor/breakpoints/breakpoints.js'), 'text/javascript')
+		;
+		echo $this->headScript();
+		echo $this->inlineScript('SCRIPT', 'Breakpoints();');
+	?>
+</head>
+<body class="dashboard">
+	<!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+
+	<nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle hamburger hamburger-close navbar-toggle-left hided"
+			data-toggle="menubar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="hamburger-bar"></span>
+			</button>
+			<button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-collapse"
+			data-toggle="collapse">
+				<i class="icon wb-more-horizontal" aria-hidden="true"></i>
+			</button>
+			<div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
+			<img class="navbar-brand-logo" src="<?php echo $this->basePath($themePath.'img/zf2-logo.png') ?>" title="Remark">
+			<span class="navbar-brand-text"> <?php echo $this->translate('MyApplication') ?></span>
+			</div>
+			<button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-search"
+			data-toggle="collapse">
+			<span class="sr-only">Toggle Search</span>
+			<i class="icon wb-search" aria-hidden="true"></i>
+			</button>
+		</div>
+	
+		<div class="navbar-container container-fluid">
+			<!-- Navbar Collapse -->
+			<div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
+			<!-- Navbar Toolbar -->
+			<?php /*include __DIR__."/../partial/navbar-toolbar.phtml";*/ ?>
+			<?php echo $this->partial('partial/navbar-toolbar.phtml', array("themePath" => $themePath)); ?>
+			<!-- End Navbar Toolbar -->
+	
+			<!-- Navbar Toolbar Right -->
+			<?php /*include __DIR__."/../partial/navbar-toolbar-right.phtml";*/ ?>
+			<?php echo $this->partial('partial/navbar-toolbar-right.phtml', array("themePath" => $themePath)); ?>
+			<!-- End Navbar Toolbar Right -->
+			</div>
+			<!-- End Navbar Collapse -->
+	
+			<!-- Site Navbar Seach -->
+			<div class="collapse navbar-search-overlap" id="site-navbar-search">
+			<form role="search">
+				<div class="form-group">
+				<div class="input-search">
+					<i class="input-search-icon wb-search" aria-hidden="true"></i>
+					<input type="text" class="form-control" name="site-search" placeholder="Search...">
+					<button type="button" class="input-search-close icon wb-close" data-target="#site-navbar-search"
+					data-toggle="collapse" aria-label="Close"></button>
+				</div>
+				</div>
+			</form>
+			</div>
+			<!-- End Site Navbar Seach -->
+		</div>
+	</nav>
+	
+	<div class="site-menubar">
+	<div class="site-menubar-body">
+		<div>
+		<div>
+
 			<?php 
-				$oBreadcrumbs = $oTwitterBootstrap->Breadcrumbs('navigation')
-					->setHeader( $this->translate('Du bist hier :') )
-					->setMinDepth(0)
+				$oTwitterBootstrap = $this->bootstrap();
+				$oNavBar = $oTwitterBootstrap->Navbar('navigation')
+					  ->setMinDepth(0)
+					  ->setMaxDepth(2)
+					  //->setPartial($topNavPartial)
+					  ->setUlClass('site-menu')
+					  ->setSubUlClass('site-menu-sub')
+					  ->setSubUlClassLevel1('site-menu-sub')
+					  ->setDefaultLiClass('site-menu-item')
+					  ->setSubLiClass('has-sub')
+					  ->setSubLiClassLevel0('has-sub')
+					  ->setLiActiveClass('active open')
+					  ->setIconPrefixClass('site-menu-icon wb-')
+					  ->setHrefSubToggleOverride('javascript:void(0);')
 				;
-				echo $oBreadcrumbs->render(); 
+				echo $oNavBar->render();
 			?>
-            <?php
-				echo $this->flashMessenger()->render('error', array('error alert flashmessages'));
-				echo $this->flashMessenger()->render('warning', array('warning alert flashmessages'));
-				echo $this->flashMessenger()->render('success', array('success alert flashmessages'));
-				echo $this->flashMessenger()->render('info', array('info alert flashmessages'));
-			?>
-			<?php
-				echo $this->content;
-			?>
-            <hr>
-            <footer>
-                <p>
-                	<span class="pull-left copyright">&copy; <?php echo date('Y') ?> by <a href="//dragon-projects.net" target="_blank">[dragon-projects.net]</a> - <?php echo $this->translate('All rights reserved.') ?></span>
-                	<span class="pull-right poweredby">
-                		Powered by &nbsp;
-                		<a href="http://php.net" target="_blank"><img src="<?php echo $this->basePath($themePath.'img/php-logo.gif') ?>" height="20" alt="php" /></a> &nbsp;
-                		<a href="http://framework.zend.com" target="_blank"><img src="<?php echo $this->basePath($themePath.'img/zf2-logo.png') ?>" height="16" alt="ZendFramework 2" /></a> &nbsp;
-                		<a href="http://www.w3.org/html/" target="_blank"><img src="<?php echo $this->basePath($themePath.'img/html5-badge-h-solo.png') ?>" height="16" alt="HTML5" /></a> &nbsp;
-                		<a href="http://jquery.com" target="_blank"><img src="<?php echo $this->basePath($themePath.'img/jquery-logo.png') ?>" height="16" alt="jQuery" /></a>
-                	</span>
-               </p>
-            </footer>
-        </div> <!-- /container -->
-        <!-- Scripts -->
-        <?php 
-        	$this->headScript()
-				->prependFile($this->basePath($themePath . 'js/app.js'))
-				->prependFile($this->basePath($themePath . 'js/bootstrap/bootstrap.min.js'))
-				->prependFile($this->basePath($themePath . 'js/jquery/jquery.min.js'))
-				->prependFile($this->basePath($themePath . 'js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
-        	;
-        	
-        	echo $this->headScript(); 
-        ?>
-        <?php echo $this->inlineScript() ?>
-    </body>
+			
+			<div class="site-menubar-section">
+			<h5>
+				Milestone
+				<span class="pull-right">30%</span>
+			</h5>
+			<div class="progress progress-xs">
+				<div class="progress-bar active" style="width: 30%;" role="progressbar"></div>
+			</div>
+			<h5>
+				Release
+				<span class="pull-right">60%</span>
+			</h5>
+			<div class="progress progress-xs">
+				<div class="progress-bar progress-bar-warning" style="width: 60%;" role="progressbar"></div>
+			</div>
+			</div>
+		</div>
+		</div>
+	</div>
+
+	<div class="site-menubar-footer">
+		<a href="javascript: void(0);" class="fold-show" data-placement="top" data-toggle="tooltip"
+		data-original-title="Settings">
+		<span class="icon wb-settings" aria-hidden="true"></span>
+		</a>
+		<a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Lock">
+		<span class="icon wb-eye-close" aria-hidden="true"></span>
+		</a>
+		<a href="javascript: void(0);" data-placement="top" data-toggle="tooltip" data-original-title="Logout">
+		<span class="icon wb-power" aria-hidden="true"></span>
+		</a>
+	</div>
+	</div>
+	<div class="site-gridmenu">
+	<div>
+		<div>
+		<ul>
+			<li>
+			<a href="apps/mailbox/mailbox.html">
+				<i class="icon wb-envelope"></i>
+				<span>Mailbox</span>
+			</a>
+			</li>
+			<li>
+			<a href="apps/calendar/calendar.html">
+				<i class="icon wb-calendar"></i>
+				<span>Calendar</span>
+			</a>
+			</li>
+			<li>
+			<a href="apps/contacts/contacts.html">
+				<i class="icon wb-user"></i>
+				<span>Contacts</span>
+			</a>
+			</li>
+			<li>
+			<a href="apps/media/overview.html">
+				<i class="icon wb-camera"></i>
+				<span>Media</span>
+			</a>
+			</li>
+			<li>
+			<a href="apps/documents/categories.html">
+				<i class="icon wb-order"></i>
+				<span>Documents</span>
+			</a>
+			</li>
+			<li>
+			<a href="apps/projects/projects.html">
+				<i class="icon wb-image"></i>
+				<span>Project</span>
+			</a>
+			</li>
+			<li>
+			<a href="apps/forum/forum.html">
+				<i class="icon wb-chat-group"></i>
+				<span>Forum</span>
+			</a>
+			</li>
+			<li>
+			<a href="index.html">
+				<i class="icon wb-dashboard"></i>
+				<span>Dashboard</span>
+			</a>
+			</li>
+		</ul>
+		</div>
+	</div>
+	</div>
+
+
+	<!-- Page -->
+	<div class="page">
+	<div class="page-content padding-30 container-fluid">
+	
+		<div class="row" data-plugin="matchHeight" data-by-row="true">
+		<div class="col-xlg-12 col-md-12">
+		
+			<!-- Widget Content -->
+			<div class="widget widget-shadow widget-responsive" id="widgetLineareaColor">
+			<div class="widget-content">
+				<?php echo $this->content; ?>
+			</div>
+			</div>
+			<!-- End Widget Linearea Color -->
+		</div>
+		</div>
+
+
+	</div>
+	</div>
+	<!-- End Page -->
+
+
+	<!-- Footer -->
+	<footer class="site-footer">
+	<span class="site-footer-legal">
+		<span class="copyright">&copy; <?php echo date('Y') ?> by <a href="//dragon-projects.net" target="_blank">[dragon-projects.net]</a> - <?php echo $this->translate('All rights reserved.') ?></span>
+	</span>
+	<div class="site-footer-right">
+		<span class="poweredby">
+			Powered by &nbsp;
+			<a href="http://php.net" target="_blank"><img src="<?php echo $this->basePath($themePath.'img/php-logo.gif') ?>" height="20" alt="php" /></a> &nbsp;
+			<a href="http://framework.zend.com" target="_blank"><img src="<?php echo $this->basePath($themePath.'img/zf2-logo.png') ?>" height="16" alt="ZendFramework 2" /></a> &nbsp;
+			<a href="http://www.w3.org/html/" target="_blank"><img src="<?php echo $this->basePath($themePath.'img/html5-badge-h-solo.png') ?>" height="16" alt="HTML5" /></a> &nbsp;
+			<a href="http://jquery.com" target="_blank"><img src="<?php echo $this->basePath($themePath.'img/jquery-logo.png') ?>" height="16" alt="jQuery" /></a>
+		</span>
+	</div>
+	</footer>
+	<?php 
+		$this->inlineScript()
+	
+	// <!-- Scripts -->
+			->appendFile($this->basePath($themePath . 'js/plugins/jQuery/jQuery-2.1.4.min.js'))
+			->appendFile('https://code.jquery.com/ui/1.11.4/jquery-ui.min.js')
+			->appendScript("$.widget.bridge('uibutton', $.ui.button);")
+			->appendFile($this->basePath($themePath . 'css/bootstrap/js/bootstrap.min.js'))
+			
+			->appendFile('https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js')
+			->appendFile($this->basePath($themePath . 'js/plugins/morris/morris.min.js'))
+			->appendFile($this->basePath($themePath . 'js/plugins/sparkline/jquery.sparkline.min.js'))
+			->appendFile($this->basePath($themePath . 'js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'))
+			->appendFile($this->basePath($themePath . 'js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'))
+			->appendFile($this->basePath($themePath . 'js/plugins/knob/jquery.knob.js'))
+			->appendFile('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js')
+			->appendFile($this->basePath($themePath . 'js/plugins/daterangepicker/daterangepicker.js'))
+			->appendFile($this->basePath($themePath . 'js/plugins/datepicker/bootstrap-datepicker.js'))
+			->appendFile($this->basePath($themePath . 'js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'))
+			->appendFile($this->basePath($themePath . 'js/plugins/slimScroll/jquery.slimscroll.min.js'))
+			->appendFile($this->basePath($themePath . 'js/plugins/fastclick/fastclick.js'))
+
+	// <!-- Scripts For This Page -->
+			->appendFile($this->basePath($themePath . 'js/app.min.js'))
+			->appendFile($this->basePath($themePath . 'js/pages/dashboard.js'))
+
+			->appendFile($this->basePath($themePath . 'js/demo.js'))
+		;
+		echo $this->inlineScript();
+	?>
+</body>
+
 </html>
