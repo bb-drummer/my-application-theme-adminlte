@@ -1,5 +1,5 @@
-###AdminLTE - Responsive Bootstrap3 Admin Template ZF2 integration
-
+AdminLTE - Responsive Bootstrap3 Admin Template ZF2 integration
+============
 
 you can access the demo: 
 
