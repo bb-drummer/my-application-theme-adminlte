@@ -34,6 +34,10 @@
 			->appendStylesheet($this->basePath($themePath . 'css/AdminLTE.min.css'))
 			->appendStylesheet($this->basePath($themePath . 'css/skins/_all-skins.min.css'))
 		;
+		$cssfiles = $oTwitterBootstrap->Config()->get('app')->get('css');
+		foreach ($cssfiles as $key => $file) {
+			$this->headLink()->appendStylesheet($this->basePath($file));
+		}
 		echo $this->headLink();
 	?>
 	<?php 
@@ -109,20 +113,20 @@
 					$navBarPartial = array('partial/bootstrap-navbar.phtml', 'default');
 					$htmlifyPartial = array('partial/sidebar-menu-htmlify.phtml', 'default');
 					$oNavBar = $oTwitterBootstrap->Navbar('navigation')
-						  ->setMinDepth(0)
-						  ->setMaxDepth(3)
-						  //->setPartial($navBarPartial)
-						  ->setUlClass('sidebar-menu')
-						  ->setSubUlClass('treeview-menu')
-						  ->setSubUlClassLevel1('treeview-menu')
-						  ->setDefaultLiClass('treeview')
-						  ->setSubLiClass('treeview')
-						  ->setSubLiClassLevel0('treeview')
-						  ->setLiActiveClass('active')
-						  //->setIconPrefixClass('fa fa-')
-						  ->setIconPrefixClass('glyphicon glyphicon-')
-						  ->setHtmlifyPartial($htmlifyPartial)
-						  //->setHrefSubToggleOverride('javascript:void(0);')
+							->setMinDepth(0)
+							->setMaxDepth(3)
+							//->setPartial($navBarPartial)
+							->setUlClass('sidebar-menu')
+							->setSubUlClass('treeview-menu')
+							->setSubUlClassLevel1('treeview-menu')
+							->setDefaultLiClass('treeview')
+							->setSubLiClass('treeview')
+							->setSubLiClassLevel0('treeview')
+							->setLiActiveClass('active')
+							//->setIconPrefixClass('fa fa-')
+							->setIconPrefixClass('glyphicon glyphicon-')
+							->setHtmlifyPartial($htmlifyPartial)
+							//->setHrefSubToggleOverride('javascript:void(0);')
 					;
 					echo $oNavBar->render();
 				?>
@@ -191,6 +195,10 @@
 			->appendFile($this->basePath($themePath . 'js/pages/dashboard.js'))
 			->appendFile($this->basePath($themePath . 'js/demo.js'))
 		;
+		$jsfiles = $oTwitterBootstrap->Config()->get('app')->get('js');
+		foreach ($jsfiles as $key => $file) {
+			$this->inlineScript()->appendFile($this->basePath($file));
+		}
 		echo $this->inlineScript();
 	?>
 	
