@@ -74,6 +74,14 @@
 				<!-- Navbar Right Menu -->
 				<div class="navbar-custom-menu">
 					<?php echo $this->partial('partial/navbar-toolbar-right.phtml', array("themePath" => $themePath)); ?>
+					<?php 
+						$oBootstrapComponents = $this->bootstrap()->Components();
+						$oLocaleMenu = $oBootstrapComponents->Languagemenu()
+							->setUlClass('nav navbar-nav navbar-right')
+							->setIconPrefixClass('flag-icon flag-icon-')
+						;
+						echo $oLocaleMenu->render(); 
+					?>
 				</div>
 			</nav>
 			
