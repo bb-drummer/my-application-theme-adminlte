@@ -1,3 +1,11 @@
+<?php 
+	$oBootstrapComponents = $this-bootstrap()->Components();
+	$oLocaleMenu = $oBootstrapComponents->Languagemenu()
+		->setUlClass('nav navbar-toolbar navbar-right navbar-toolbar-right')
+		->setIconPrefixClass('flag-icon flag-icon-')
+	;
+	echo $oLocaleMenu->render(); 
+?>
 			<ul class="nav navbar-nav">
 				<!-- Messages: style can be found in dropdown.less-->
 				<li class="dropdown messages-menu">
