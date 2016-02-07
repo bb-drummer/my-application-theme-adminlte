@@ -163,7 +163,30 @@
 		
 			<!-- Main content -->
 			<section class="content">
-				<?php echo $this->content; ?>
+				<?php
+					$params = $this->getHelperPluginManager()
+						->getServiceLocator()
+						->get('Application')
+						->getMvcEvent()
+						->getRouteMatch()
+						->getParams();
+					if ($params["action"] == "index") {
+						echo $this->content;
+					} else {
+						$panelLayout = $oComponents->Panel()
+						->setHeader( (isset($this->title) ? $this->title : "") )
+						->setContent(
+								array(
+										'tagname' => 'div',
+										'classnames' => 'panel-body alert-wrap',
+										'content' => $this->content,
+								)
+							)
+						;
+						
+						echo $panelLayout;
+					}
+				?>
 			</section>
 			<!-- /.content -->
 		</div>
@@ -200,6 +223,8 @@
 			->appendFile($this->basePath($themePath . 'js/app.min.js'))
 			->appendFile($this->basePath($themePath . 'js/pages/dashboard.js'))
 			->appendFile($this->basePath($themePath . 'js/demo.js'))
+			
+			->appendFile($this->basePath($themePath . '../zf2-basic/js/app.js'))
 		;
 		$jsfiles = $oTwitterBootstrap->Config()->get('app')->get('js');
 		if (is_array($jsfiles) || ($jsfiles instanceof \Zend\Config\Config)) foreach ($jsfiles as $key => $file) {
