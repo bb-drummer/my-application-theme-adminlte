@@ -151,8 +151,10 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Dashboard
-					<small>Version 2.0</small>
+					<?php echo $this->escapeHtml(isset($this->title) ? $this->title." - " : ""); ?>
+					<small>Dashboard
+						<small>Version 2.0</small>
+					</small>
 				</h1>
 
 					<?php 
