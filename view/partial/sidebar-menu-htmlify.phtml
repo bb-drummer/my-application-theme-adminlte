@@ -5,7 +5,7 @@
 // get attribs for element
 $attribs = [
 		'id'     => $page->getId(),
-		'title'  => $menu->translate($page->getTitle()), // $menu->getTranslator()->translate($page->getTitle()), // , $page->getTextDomain()),
+		'title'  => $menu->translate($page->getTitle(), $page->getTextDomain()), // $menu->getTranslator()->translate($page->getTitle()), // , $page->getTextDomain()),
 ];
 $classnames = array();
 if ( $addClassToListItem === false ) {
@@ -38,7 +38,7 @@ if ($href) {
 
 $html  = '<' . $element . $menu->htmlAttribs($attribs) . '>';
 $html .= ($page->get('icon') ? '<i class="' . $menu->getIconPrefixClass() . '' . $page->get('icon') . '"></i> ' : '' );
-$label = $menu->translate($page->getTitle()); // $menu->getTranslator()->translate($page->getLabel()); // , $page->getTextDomain());
+$label = $menu->translate($page->getLabel(), $page->getTextDomain()); // $menu->getTranslator()->translate($page->getLabel()); // , $page->getTextDomain());
 if ($depth == 0) {
 	if ($escapeLabel === true) {
 		/** @var \Zend\View\Helper\EscapeHtml $escaper */
