@@ -1,9 +1,10 @@
 <?php
+/** @var $page \Zend\Navigation\Page\Mvc **/
 //$page = $this->page;
 // get attribs for element
 $attribs = [
 		'id'     => $page->getId(),
-		'title'  => $menu->getTranslator()->translate($page->getTitle()), // , $page->getTextDomain()),
+		'title'  => $this->translate($page->getTitle()), // $menu->getTranslator()->translate($page->getTitle()), // , $page->getTextDomain()),
 ];
 $classnames = array();
 if ( $addClassToListItem === false ) {
@@ -36,7 +37,7 @@ if ($href) {
 
 $html  = '<' . $element . $menu->htmlAttribs($attribs) . '>';
 $html .= ($page->get('icon') ? '<i class="' . $menu->getIconPrefixClass() . '' . $page->get('icon') . '"></i> ' : '' );
-$label = $menu->getTranslator()->translate($page->getLabel()); // , $page->getTextDomain());
+$label = $this->translate($page->getTitle()); // $menu->getTranslator()->translate($page->getLabel()); // , $page->getTextDomain());
 if ($depth == 0) {
 	if ($escapeLabel === true) {
 		/** @var \Zend\View\Helper\EscapeHtml $escaper */
