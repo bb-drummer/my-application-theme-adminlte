@@ -2,6 +2,9 @@
   "name" : "themes/zf2-adminlte",
   "description" : "ZF2AdminLTE - Responsive Bootstrap3 Theme ZF2 skeleton",
   "version" : "0.0.1",
+  "extra": {
+    "installer-name": "adminlte"
+  },
   "require" : {
     "composer/installers": "~1.0",
     "php" : ">=5.5",
