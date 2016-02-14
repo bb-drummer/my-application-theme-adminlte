@@ -18,7 +18,7 @@
 		;
 	?>
 	<?php 
-		$themePath = "assets/themes/adminlte/";
+		$themePath = "themes/adminlte/assets/";
 		$this->headLink(array(
 				'rel' => 'shortcut icon', 
 				'type' => 'image/vnd.microsoft.icon', 
@@ -36,7 +36,7 @@
 			->appendStylesheet($this->basePath($themePath . 'js/plugins/jvectormap/jquery-jvectormap-1.2.2.css'))
 			->appendStylesheet($this->basePath($themePath . 'js/plugins/datatables/jquery.dataTables.min.css'))
 			//->appendStylesheet($this->basePath($themePath . 'js/plugins/datatables/dataTables.bootstrap.css'))
-			//->appendStylesheet($this->basePath($themePath . '../zf2-basic/js/datatables/css/dataTables.bootstrap.min.css'))
+			//->appendStylesheet($this->basePath($themePath . '../../basic/assets/js/datatables/css/dataTables.bootstrap.min.css'))
 			->appendStylesheet($this->basePath($themePath . 'css/AdminLTE.min.css'))
 			->appendStylesheet($this->basePath($themePath . 'css/skins/_all-skins.min.css'))
 			->appendStylesheet($this->basePath($themePath . 'css/fontawesome/css/font-awesome.min.css'))
@@ -240,12 +240,12 @@
 			->appendFile($this->basePath($themePath . 'js/plugins/slimScroll/jquery.slimscroll.min.js'))
 			->appendFile($this->basePath($themePath . 'js/plugins/chartjs/Chart.min.js'))
 			
-				->appendFile($this->basePath($themePath . '../zf2-basic/js/datatables/js/jquery.dataTables.min.js'))
+				->appendFile($this->basePath($themePath . '../../basic/assets/js/datatables/js/jquery.dataTables.min.js'))
 			->appendFile($this->basePath($themePath . 'js/app.min.js'))
 			//->appendFile($this->basePath($themePath . 'js/pages/dashboard.js'))
 			//->appendFile($this->basePath($themePath . 'js/demo.js'))
 			
-			->appendFile($this->basePath($themePath . '../zf2-basic/js/app.js'))
+			->appendFile($this->basePath($themePath . '../../basic/assets/js/app.js'))
 		;
 		$jsfiles = $oTwitterBootstrap->Config()->get('app')->get('js');
 		if (is_array($jsfiles) || ($jsfiles instanceof \Zend\Config\Config)) foreach ($jsfiles as $key => $file) {
