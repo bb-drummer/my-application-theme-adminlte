@@ -1,10 +1,7 @@
 {
-  "name" : "themes/zf2-adminlte",
+  "name" : "my-application/zf2-theme-adminlte",
   "description" : "ZF2AdminLTE - Responsive Bootstrap3 Theme ZF2 skeleton",
   "version" : "0.0.1",
-  "extra": {
-    "installer-name": "adminlte"
-  },
   "require" : {
     "composer/installers": "~1.0",
     "php" : ">=5.5",
@@ -13,6 +10,7 @@
   "license" : "BSD-3-Clause",
   "keywords" : [ "bootstrap", "theme", "AdminLTE", "zendframework2", "skeleton" ],
   "extra" : {
+    "installer-name": "adminlte",
     "branch-alias" : {
       "dev-master" : "master"
     }
@@ -24,7 +22,7 @@
     "post-update-cmd" : [ ]
   },
   "type" : "zend-extra",
-  "homepage" : "http://git.dragon-projects.de:81/themes/zf2-adminlte",
+  "homepage" : "http://git.dragon-projects.de:81/my-application/zf2-theme-adminlte",
   "authors" : [ {
     "name" : "Björn Bartels",
     "email" : "bartels@dragon-projects.net",
