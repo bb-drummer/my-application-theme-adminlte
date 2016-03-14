@@ -40,6 +40,8 @@
 			->appendStylesheet($this->basePath($themePath . 'css/AdminLTE.min.css'))
 			->appendStylesheet($this->basePath($themePath . 'css/skins/_all-skins.min.css'))
 			->appendStylesheet($this->basePath($themePath . 'css/fontawesome/css/font-awesome.min.css'))
+				
+			->appendStylesheet($this->basePath('application-assets/dist/myapplication.min.css'))
 		;
 		$cssfiles = $oTwitterBootstrap->Config()->get('app')->get('css');
 		if (is_array($cssfiles) || ($cssfiles instanceof \Zend\Config\Config)) foreach ($cssfiles as $key => $file) {
@@ -240,12 +242,12 @@
 			->appendFile($this->basePath($themePath . 'js/plugins/slimScroll/jquery.slimscroll.min.js'))
 			->appendFile($this->basePath($themePath . 'js/plugins/chartjs/Chart.min.js'))
 			
-				->appendFile($this->basePath($themePath . '../../basic/assets/js/datatables/js/jquery.dataTables.min.js'))
+			->appendFile($this->basePath($themePath . '../../basic/assets/js/datatables/js/jquery.dataTables.min.js'))
 			->appendFile($this->basePath($themePath . 'js/app.min.js'))
 			//->appendFile($this->basePath($themePath . 'js/pages/dashboard.js'))
 			//->appendFile($this->basePath($themePath . 'js/demo.js'))
-			
-			->appendFile($this->basePath($themePath . '../../basic/assets/js/app.js'))
+				
+			->appendFile($this->basePath('application-assets/dist/myapplication.min.js'))
 		;
 		$jsfiles = $oTwitterBootstrap->Config()->get('app')->get('js');
 		if (is_array($jsfiles) || ($jsfiles instanceof \Zend\Config\Config)) foreach ($jsfiles as $key => $file) {
