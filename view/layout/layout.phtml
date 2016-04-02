@@ -1,14 +1,14 @@
 <?php 
 	echo $this->doctype(); 
-	/** @var \UIComponents\View\Helper\Bootstrap $oTwitterBootstrap **/
-	$oTwitterBootstrap = $this->bootstrap();
+	/** @var \UIComponents\View\Helper\Utilities $oUtilities **/
+	$oUtilities = $this->Utilities();
 	/** @var \UIComponents\View\Helper\Components $oComponents **/
 	$oComponents = $this->Components();
 ?>
 <html lang="<?php echo \Locale::getPrimaryLanguage(null) ?>">
 <head>
 	<meta charset="utf-8">
-	<?php echo $this->headTitle('[BB] '. $this->translate($oTwitterBootstrap->AppTitle()))->setSeparator(' - ')->setAutoEscape(false) ?>
+	<?php echo $this->headTitle('[BB] '. $this->translate($oUtilities->AppTitle()))->setSeparator(' - ')->setAutoEscape(false) ?>
 	<?php 
 		echo $this->headMeta()
 			->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
@@ -22,7 +22,7 @@
 		$this->headLink(array(
 				'rel' => 'shortcut icon', 
 				'type' => 'image/vnd.microsoft.icon', 
-				'href' => $this->basePath($themePath . $oTwitterBootstrap->AppFavicon())
+				'href' => $this->basePath($themePath . $oUtilities->AppFavicon())
  			))
  			/*->append((object)array(
 				'rel' => 'apple-touch-icon', 
@@ -43,7 +43,7 @@
 				
 			->appendStylesheet($this->basePath('application-assets/dist/myapplication.min.css'))
 		;
-		$cssfiles = $oTwitterBootstrap->Config()->get('app')->get('css');
+		$cssfiles = $oUtilities->Config()->get('app')->get('css');
 		if (is_array($cssfiles) || ($cssfiles instanceof \Zend\Config\Config)) foreach ($cssfiles as $key => $file) {
 			$this->headLink()->appendStylesheet($this->basePath($file));
 		}
@@ -68,9 +68,9 @@
 			<!-- Logo -->
 			<a href="/" class="logo">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><?php echo $oTwitterBootstrap->AppTitle(true); ?></span>
+				<span class="logo-mini"><?php echo $oUtilities->AppTitle(true); ?></span>
 				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><?php echo $oTwitterBootstrap->AppTitle(); ?></span>
+				<span class="logo-lg"><?php echo $oUtilities->AppTitle(); ?></span>
 			</a>
 		
 			<!-- Header Navbar: style can be found in header.less -->
@@ -83,8 +83,7 @@
 				<div class="navbar-custom-menu">
 					<?php echo $this->partial('partial/navbar-toolbar-right.phtml', array("themePath" => $themePath)); ?>
 					<?php 
-						$oBootstrapComponents = $this->bootstrap()->Components();
-						$oLocaleMenu = $oBootstrapComponents->Languagemenu()
+						$oLocaleMenu = $oComponents->Languagemenu()
 							->setUlClass('nav navbar-nav navbar-right')
 							->setIconPrefixClass('flag-icon flag-icon-')
 						;
@@ -129,7 +128,7 @@
 				<?php 
 					$navBarPartial = array('partial/bootstrap-navbar.phtml', 'default');
 					$htmlifyPartial = array('partial/sidebar-menu-htmlify.phtml', 'default');
-					$oNavBar = $oTwitterBootstrap->Navbar('navigation')
+					$oNavBar = $oComponents->Topbar('navigation')
 							->setMinDepth(0)
 							->setMaxDepth(3)
 							//->setPartial($navBarPartial)
@@ -163,7 +162,7 @@
 				</h1>
 
 					<?php 
-						$oBreadcrumbs = $oTwitterBootstrap->Breadcrumbs('navigation')
+						$oBreadcrumbs = $oComponents->Breadcrumbs('navigation')
 							->setHeader( $this->translate('you are here') )
 							->setMinDepth(0)
 						;
@@ -185,12 +184,12 @@
 				</div>
 			
 				<?php
-					$params = $this->getHelperPluginManager()
+					/*$params = $this->getHelperPluginManager()
 						->getServiceLocator()
 						->get('Application')
 						->getMvcEvent()
 						->getRouteMatch()
-						->getParams();
+						->getParams();*/
 					//if ($params["action"] == "index") {
 						//echo $this->content;
 					//} else {
@@ -249,7 +248,7 @@
 				
 			->appendFile($this->basePath('application-assets/dist/myapplication.min.js'))
 		;
-		$jsfiles = $oTwitterBootstrap->Config()->get('app')->get('js');
+		$jsfiles = $oUtilities->Config()->get('app')->get('js');
 		if (is_array($jsfiles) || ($jsfiles instanceof \Zend\Config\Config)) foreach ($jsfiles as $key => $file) {
 			$this->inlineScript()->appendFile($this->basePath($file));
 		}
