@@ -1,6 +1,7 @@
 <?php
 /** @var Zend\Navigation\Page\Mvc $page **/
 /** @var UIComponents\View\Helper\Navigation\Menu $menu **/
+$menu = $this->menu;
 
 // get attribs for element
 $attribs = [
@@ -36,7 +37,7 @@ if ($href) {
 	$attribs['href'] = '#';
 }
 
-$html  = '<' . $element . $menu->htmlAttribs($attribs) . '>';
+$html  = '<' . $element .' '. $menu->htmlAttribs($attribs) . '>';
 $html .= ($page->get('icon') ? '<i class="' . $menu->getIconPrefixClass() . '' . $page->get('icon') . '"></i> ' : '' );
 $label = $menu->translate($page->getLabel(), $page->getTextDomain());
 if ($depth == 0) {
