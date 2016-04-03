@@ -128,7 +128,7 @@
 				<?php 
 					$navBarPartial = array('partial/bootstrap-navbar.phtml', 'default');
 					$htmlifyPartial = array('partial/sidebar-menu-htmlify.phtml', 'default');
-					$oNavBar = $oComponents->Topbar('navigation')
+					$oNavBar = $oComponents->Nav()
 							->setMinDepth(0)
 							->setMaxDepth(3)
 							//->setPartial($navBarPartial)
@@ -162,7 +162,7 @@
 				</h1>
 
 					<?php 
-						$oBreadcrumbs = $oComponents->Breadcrumbs('navigation')
+						$oBreadcrumbs = $oComponents->Breadcrumbs()
 							->setHeader( $this->translate('you are here') )
 							->setMinDepth(0)
 						;
